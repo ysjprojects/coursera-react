@@ -29,7 +29,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        console.log("Current state is: " + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
     }
 
 
@@ -56,15 +56,16 @@ class CommentForm extends Component {
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                         <option value="5">5</option>
-                                        <Errors
-                                            className="text-danger"
-                                            model=".rating"
-                                            show="touched"
-                                            messages={{
-                                                required: 'Required',
-                                            }}
-                                        />
+
                                     </Control.select>
+                                    <Errors
+                                        className="text-danger"
+                                        model=".rating"
+                                        show="touched"
+                                        messages={{
+                                            required: 'Required',
+                                        }}
+                                    />
                                 </Col>
 
 
