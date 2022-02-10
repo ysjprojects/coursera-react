@@ -1,19 +1,32 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Loading } from './LoadingComponent';
+function RenderCard({ item, isLoading, errmsg }) {
+    if (isLoading) {
+        return (
+            <Loading />
+        );
+    }
+    else if (errmsg) {
+        return (
+            <h4>{errmsg}</h4>
+        )
+    }
+    else {
+        return (
+            <Card>
+                <CardImg src={item.image} alt={item.name} />
+                <CardBody>
+                    <CardTitle>{item.name}</CardTitle>
+                    {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
+                    <CardText>
+                        {item.description}
+                    </CardText>
+                </CardBody>
+            </Card>)
+    }
 
-function RenderCard({ item }) {
-    return (
-        <Card>
-            <CardImg src={item.image} alt={item.name} />
-            <CardBody>
-                <CardTitle>{item.name}</CardTitle>
-                {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
-                <CardText>
-                    {item.description}
-                </CardText>
-            </CardBody>
-        </Card>
-    )
+
 }
 
 function Home(props) {
@@ -21,13 +34,13 @@ function Home(props) {
         <div className="container">
             <div className='row align-items-start'>
                 <div className='col-12 col-md m-1'>
-                    <RenderCard item={props.dishes} />
+                    <RenderCard item={props.dishes} isLoading={props.isLoading} errmsg={props.errmsg} />
                 </div>
                 <div className='col-12 col-md m-1'>
-                    <RenderCard item={props.promotions} />
+                    <RenderCard item={props.promotions} isLoading={props.isLoading} errmsg={props.errmsg} />
                 </div>
                 <div className='col-12 col-md m-1'>
-                    <RenderCard item={props.leaders} />
+                    <RenderCard item={props.leaders} isLoading={props.isLoading} errmsg={props.errmsg} />
                 </div>
             </div>
         </div>
